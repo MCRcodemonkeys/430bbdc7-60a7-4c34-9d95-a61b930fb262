@@ -1,0 +1,72 @@
+{
+  "LogstashInputs": [
+      {
+          "Plugin": "Syslog-TEST1",
+          "Port": 11432,
+          "Protocol": "tcp"
+      },
+      {
+          "Plugin": "Syslog",
+          "Port": 11432,
+          "Protocol": "udp"
+      },
+      {
+          "Name": "stupid old router",
+          "Plugin": "Syslog-SSL",
+          "Port": 11433,
+          "Protocol": "tcp",
+          "TLS_VERSION": "TLS1.0"
+      },
+      {
+          "Name" : "dev-mtls",
+          "Plugin": "Beats",
+          "Port": 11434,
+          "Protocol": "tcp",
+          "MTLS": {
+              "PathCA":"ca_cert.pem",
+              "PathCRT":"crt_cert.pem",
+              "ExpiryDate":"20/2/2022"
+              }
+      },
+      {
+          "Plugin": "Beats-SSL",
+          "Port": 11435,
+          "Protocol": "tcp",
+          "CustomCert": {
+              "Path": "example.com.pem",
+              "ExpiryDate":"20/2/21"
+              }
+      },
+      {
+          "Plugin": "TCP",
+          "Port": 11436,
+          "Protocol": "tcp",
+          "Codec": "json"
+      },
+      {
+          "Name" : "prod-firewall",
+          "Plugin": "TCP-SSL",
+          "Port": 11437,
+          "Protocol": "tcp",
+          "Codec": "json",
+          "Firewall": "prod"
+      },
+      {
+          "Plugin": "UDP",
+          "Port": 11438,
+          "Protocol": "udp"
+      },
+      {
+          "Plugin": "Gelf",
+          "Port": 11439,
+          "Protocol": "udp"
+      }
+  ],
+  "LogstashVersion": 7.5,
+  "FirewallRules": [
+      {
+          "Name": "prod",
+          "Whitelist": [ "172.16.10.0/24", "56.43.52.2/31" ]
+      }
+  ]
+}
