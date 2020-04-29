@@ -1,7 +1,7 @@
 {
   "LogstashInputs": [
       {
-          "Plugin": "Syslog-TEST2",
+          "Plugin": "Syslog-TEST3",
           "Port": 11432,
           "Protocol": "tcp"
       },
